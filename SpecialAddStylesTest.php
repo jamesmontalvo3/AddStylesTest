@@ -17,49 +17,50 @@ class SpecialAddStylesTest extends SpecialPage {
 		// $this->setHeaders();
 
 		$position = $this->getRequest()->getVal( 'position', 'top' );
-		$mode = $this->getRequest()->getVal( 'mode', 'both' );
+		$load = $this->getRequest()->getVal( 'load', 'both' );
 
 		$out = $this->getOutput();
+		$out->addHTML( "<h2>Instructions</h2>" );
 		$out->addHTML( "<p>set query string 'position' to 'top', 'bottom', or 'both' to use the 'top' or 'bottom' resource.</p>" );
-		$out->addHTML( "<p>set query string 'mode' to 'styles', 'scripts', or 'both'</p>" );
+		$out->addHTML( "<p>set query string 'load' to 'styles', 'scripts', or 'both'</p>" );
 		$out->addHTML( "<p>Scripts will write to the JS console, e.g. 'top script included'.</p>" );
 		$out->addHTML( "<p>CSS will style the div below.</p>" );
 
-		$contents = "mode = $mode, position = $position. ";
+		$contents = "load = $load, position = $position. ";
 
 		if ( $position === 'top' || $position === 'both' ) {
-			$this->addModule( 'top', $mode );
+			$this->addModule( 'top', $load );
 			$contents .= "<span class='add-styles-test-top'>Attempting to load top resource. This text will turn green if resource loads. </span>";
 		}
 
 		if ( $position === 'bottom' || $position === 'both' ) {
-			$this->addModule( 'bottom', $mode );
+			$this->addModule( 'bottom', $load );
 			$contents .= "<span class='add-styles-test-bottom'>Attempting to load bottom resource. This text will turn red if resource loads.</span>";
 		}
 
-		$out->addHTML( "<div>$contents</div>" );
+		$out->addHTML( "<h2>CSS</h2><div>$contents</div></h2>" );
 
-		$out->addHTML( "<div id='add-styles-test-js'></div>" );
+		$out->addHTML( "<h2>Javascript</h2><div id='add-styles-test-js'></div>" );
 
 	}
 
-	protected function addModule ( $position, $mode ) {
+	protected function addModule ( $position, $load ) {
 		if ( ! in_array( $position, ['top','bottom'] ) ) {
 			$this->getOutput()->addHTML( '<p>bad "position" input</p>' );
 			die();
 		}
 
-		if ( $mode === 'both' ) {
+		if ( $load === 'both' ) {
 			$this->getOutput()->addModules( "ext.addstylestest.$position" );
 		}
-		else if ( $mode === 'scripts' ) {
+		else if ( $load === 'scripts' ) {
 			$this->getOutput()->addModuleScripts( "ext.addstylestest.$position" );
 		}
-		else if ( $mode === 'styles' ) {
+		else if ( $load === 'styles' ) {
 			$this->getOutput()->addModuleStyles( "ext.addstylestest.$position" );
 		}
 		else {
-			$this->getOutput()->addHTML( '<p>bad "mode" input</p>' );
+			$this->getOutput()->addHTML( '<p>bad "load" input</p>' );
 			die();
 		}
 	}
