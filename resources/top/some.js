@@ -1,1 +1,1 @@
-console.log( 'top resource loaded' );
+$('#add-styles-test-js').append('<div>top resource javascript loaded</div>');

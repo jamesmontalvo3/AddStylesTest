@@ -29,16 +29,17 @@ class SpecialAddStylesTest extends SpecialPage {
 
 		if ( $position === 'top' || $position === 'both' ) {
 			$this->addModule( 'top', $mode );
-			$contents .= "Attempting to load top resource. ";
+			$contents .= "<span class='add-styles-test-top'>Attempting to load top resource. This text will turn green if resource loads. </span>";
 		}
 
 		if ( $position === 'bottom' || $position === 'both' ) {
 			$this->addModule( 'bottom', $mode );
-			$contents .= "Attempting to load bottom resource. ";
+			$contents .= "<span class='add-styles-test-bottom'>Attempting to load bottom resource. This text will turn red if resource loads.</span>";
 		}
 
+		$out->addHTML( "<div>$contents</div>" );
 
-		$out->addHTML( "<div class='add-styles-test-top add-styles-test-bottom'>$contents</div>" );
+		$out->addHTML( "<div id='add-styles-test-js'></div>" );
 
 	}
 
