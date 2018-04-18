@@ -25,16 +25,16 @@ class SpecialAddStylesTest extends SpecialPage {
 		$out->addHTML( "<p>Scripts will write to the JS console, e.g. 'top script included'.</p>" );
 		$out->addHTML( "<p>CSS will style the div below.</p>" );
 
-		$contents = '';
+		$contents = "mode = $mode, position = $position. ";
 
 		if ( $position === 'top' || $position === 'both' ) {
 			$this->addModule( 'top', $mode );
-			$contents .= "Top resource was added. ";
+			$contents .= "Attempting to load top resource. ";
 		}
 
 		if ( $position === 'bottom' || $position === 'both' ) {
 			$this->addModule( 'bottom', $mode );
-			$contents .= "Bottom resource was added. ";
+			$contents .= "Attempting to load bottom resource. ";
 		}
 
 
