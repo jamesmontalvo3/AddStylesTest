@@ -1,0 +1,29 @@
+{
+	"name": "AddStylesTest",
+	"version": "1.0.0",
+	"url": "https://www.mediawiki.org",
+	"type": "specialpage",
+	"SpecialPages": {
+		"AddStylesTest": "SpecialAddStylesTest"
+	},
+	"AutoloadClasses": {
+		"SpecialAddStylesTest": "SpecialAddStylesTest.php"
+	},
+	"ResourceModules": {
+		"ext.addstylestest.top": {
+			"position": "top",
+			"styles": "top/some.css",
+			"scripts": "top/some.js"
+		},
+		"ext.addstylestest.bottom": {
+			"position": "bottom",
+			"styles": "bottom/some.css",
+			"scripts": "bottom/some.js"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "AddStylesTest/resources"
+	},
+	"manifest_version": 1
+}
